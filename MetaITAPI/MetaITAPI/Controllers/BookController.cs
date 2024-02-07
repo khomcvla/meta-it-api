@@ -1,6 +1,8 @@
+using System.Reflection;
 using MetaITAPI.Dtos;
 using MetaITAPI.Entities;
 using MetaITAPI.Interfaces;
+using MetaITAPI.Utils.Constants;
 using MetaITAPI.Utils.Exceptions;
 using MetaITAPI.Utils.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,8 @@ public class BookController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> GetAllBooks()
     {
+        _logger.LogInformation("Getting all books.");
+
         var response = await _bookService.GetAll();
         return StatusCode(response.StatusCode, response.Value);
     }
@@ -41,6 +45,8 @@ public class BookController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> GetBook([FromRoute] int bookId)
     {
+        _logger.LogInformation("Getting a book.");
+
         var response = await _bookService.GetById(bookId);
         return StatusCode(response.StatusCode, response.Value);
     }
@@ -53,6 +59,8 @@ public class BookController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> CreateBook([FromBody] BookPostDto bookDto)
     {
+        _logger.LogInformation("Creating a new book.");
+
         var response = await _bookService.Add(bookDto);
         return StatusCode(response.StatusCode, response.Value);
     }
@@ -67,6 +75,8 @@ public class BookController : ControllerBase
         [FromRoute] int bookId,
         [FromBody] BookPatchDto bookDto)
     {
+        _logger.LogInformation("Updating a book.");
+
         if (bookDto.AuthorId is null && bookDto.Title is null)
             throw new InvalidInputException();
 
@@ -82,6 +92,8 @@ public class BookController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> DeleteBook([FromRoute] int bookId)
     {
+        _logger.LogInformation("Deleting a book.");
+
         var response = await _bookService.DeleteById(bookId);
         return StatusCode(response.StatusCode, response.Value);
     }

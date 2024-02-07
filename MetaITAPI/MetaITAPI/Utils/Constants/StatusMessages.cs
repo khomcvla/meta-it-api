@@ -13,5 +13,8 @@
 
         public const string AuthorNotExist = $"This AuthorId does not exist! {CheckDetails}";
         public const string BookNotExist = $"This BookId does not exist! {CheckDetails}";
+
+        public const string BookController = "BookController: ";
+        public const string AuthorController = "AuthorController: ";
     }
 }

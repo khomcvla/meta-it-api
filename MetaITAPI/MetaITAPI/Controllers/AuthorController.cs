@@ -1,5 +1,7 @@
+using System.Reflection;
 using MetaITAPI.Dtos;
 using MetaITAPI.Interfaces;
+using MetaITAPI.Utils.Constants;
 using MetaITAPI.Utils.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +29,8 @@ public class AuthorController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> GetAllAuthors()
     {
+        _logger.LogInformation("Getting all authors.");
+
         var response = await _authorService.GetAll();
         return StatusCode(response.StatusCode, response.Value);
     }

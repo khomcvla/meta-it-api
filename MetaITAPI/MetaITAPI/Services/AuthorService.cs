@@ -12,7 +12,8 @@ public class AuthorService : IAuthorService
 
     public AuthorService(
         IMapper mapper,
-        IAuthorRepository authorRepository)
+        IAuthorRepository authorRepository,
+        ILogger<AuthorService> logger)
     {
         _mapper = mapper;
         _authorRepository = authorRepository;
