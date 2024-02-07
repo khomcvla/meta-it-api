@@ -1,9 +1,10 @@
 using AutoMapper;
-using MetaITAPI.Common.Responses;
 using MetaITAPI.Dtos;
 using MetaITAPI.Entities;
 using MetaITAPI.Interfaces;
 using MetaITAPI.Utils.Constants;
+using MetaITAPI.Utils.Exceptions;
+using MetaITAPI.Utils.Responses;
 
 namespace MetaITAPI.Services;
 
@@ -31,7 +32,7 @@ public class BookService : IBookService
     {
         var book = await _bookRepository.GetById(bookId);
         if (book is null)
-            return new ServiceResponse(StatusCodes.Status404NotFound, StatusMessages.NotExist);
+            throw new NotExistException(StatusMessages.BookNotExist);
 
         var result = _mapper.Map<BookGetDto>(book);
         return new ServiceResponse(StatusCodes.Status200OK, result);
@@ -39,8 +40,11 @@ public class BookService : IBookService
 
     public async Task<ServiceResponse> Add(BookPostDto bookDto)
     {
+        if (!await _bookRepository.IsAuthorIdExist(bookDto.AuthorId))
+            throw new NotExistException(StatusMessages.AuthorNotExist);
+
         if (await _bookRepository.IsBookExist(bookDto.AuthorId, bookDto.Title))
-            return new ServiceResponse(StatusCodes.Status409Conflict, StatusMessages.AlreadyExist);
+            throw new AlreadyExistException();
 
         var book = _mapper.Map<Book>(bookDto);
         var result = await _bookRepository.Add(book);
@@ -53,7 +57,7 @@ public class BookService : IBookService
     {
         var book = await _bookRepository.GetById(bookId);
         if (book is null)
-            return new ServiceResponse(StatusCodes.Status404NotFound, StatusMessages.NotExist);
+            throw new NotExistException(StatusMessages.BookNotExist);
 
         _mapper.Map(bookDto, book);
 
@@ -66,7 +70,7 @@ public class BookService : IBookService
     public async Task<ServiceResponse> Delete(int bookId)
     {
         if (!await _bookRepository.IsBookIdExist(bookId))
-            return new ServiceResponse(StatusCodes.Status404NotFound, StatusMessages.NotExist);
+            throw new NotExistException(StatusMessages.BookNotExist);
 
         var book = await _bookRepository.GetById(bookId);
         var result = await _bookRepository.Delete(book!);

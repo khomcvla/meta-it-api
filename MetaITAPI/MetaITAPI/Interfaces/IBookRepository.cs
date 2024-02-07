@@ -4,12 +4,12 @@ namespace MetaITAPI.Interfaces;
 
 public interface IBookRepository
 {
+    Task<bool> IsAuthorIdExist(int authorId);
     Task<bool> IsBookIdExist(int bookId);
     Task<bool> IsBookExist(int authorId, string title);
 
     Task<List<Book>> GetAll();
     Task<Book?> GetById(int bookId);
-    Task<Book?> GetByAuthorIdAndTitle(int authorid, string title);
 
     Task<bool> Add(Book book);
     Task<bool> AddRange(List<Book> book);

@@ -14,6 +14,11 @@ public class BookRepository : IBookRepository
         _dataContext = dataContext;
     }
 
+    public async Task<bool> IsAuthorIdExist(int authorId)
+    {
+        return await _dataContext.Books.AnyAsync(b => b.AuthorId == authorId);
+    }
+
     public async Task<bool> IsBookIdExist(int bookId)
     {
         return await _dataContext.Books.AnyAsync(b => b.BookId == bookId);
@@ -38,20 +43,9 @@ public class BookRepository : IBookRepository
             .ToListAsync();
     }
 
-    public async Task<List<Author>> GetAllAuthors()
-    {
-        return await _dataContext.Authors.AsNoTracking().ToListAsync();
-    }
-
     public async Task<Book?> GetById(int bookId)
     {
-        return await _dataContext.Books.AsNoTracking().FirstOrDefaultAsync(b => b.BookId == bookId);
-    }
-
-    public async Task<Book?> GetByAuthorIdAndTitle(int authorId, string title)
-    {
-        return await _dataContext.Books.AsNoTracking()
-            .FirstOrDefaultAsync(b => b.AuthorId == authorId && b.Title.ToLower().Contains(title.ToLower()));
+        return await _dataContext.Books.FirstOrDefaultAsync(b => b.BookId == bookId);
     }
 
     //ADD

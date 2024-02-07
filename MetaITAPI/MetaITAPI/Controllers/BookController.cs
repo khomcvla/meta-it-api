@@ -1,8 +1,8 @@
-using MetaITAPI.Common.Responses;
 using MetaITAPI.Dtos;
 using MetaITAPI.Entities;
 using MetaITAPI.Interfaces;
 using MetaITAPI.Utils.Exceptions;
+using MetaITAPI.Utils.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MetaITAPI.Controllers;

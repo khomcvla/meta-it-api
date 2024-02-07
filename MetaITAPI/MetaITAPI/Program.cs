@@ -4,7 +4,7 @@ using MetaITAPI.Data;
 using MetaITAPI.Interfaces;
 using MetaITAPI.Repository;
 using MetaITAPI.Services;
-using MetaITAPI.Utils.Handlers;
+using MetaITAPI.Utils.Middlewares;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -82,9 +82,6 @@ if (app.Environment.IsProduction())
     app.UseHsts();
 }
 
-// Exceptions Handler
-app.UseExceptionHandler(ExceptionHandlerHelper.JsonHandler());
-
 app.UseHttpsRedirection();
 app.UseRouting();
 
@@ -95,6 +92,7 @@ app.UseAuthorization();
 
 // Middlewares
 //app.UseMiddleware<AccessForbiddenMiddleware>(); //needs to be implemented in case of IdentityProvider
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

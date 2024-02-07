@@ -1,7 +1,7 @@
 using AutoMapper;
-using MetaITAPI.Common.Responses;
 using MetaITAPI.Dtos;
 using MetaITAPI.Interfaces;
+using MetaITAPI.Utils.Responses;
 
 namespace MetaITAPI.Services;
 

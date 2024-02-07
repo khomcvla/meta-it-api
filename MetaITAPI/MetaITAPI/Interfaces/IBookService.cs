@@ -1,5 +1,5 @@
-using MetaITAPI.Common.Responses;
 using MetaITAPI.Dtos;
+using MetaITAPI.Utils.Responses;
 
 namespace MetaITAPI.Interfaces;
 

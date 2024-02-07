@@ -1,8 +1,10 @@
-﻿namespace MetaITAPI.Utils.Exceptions;
+﻿using MetaITAPI.Utils.Constants;
+
+namespace MetaITAPI.Utils.Exceptions;
 
 public class InvalidInputException : Exception
 {
-    public InvalidInputException()
+    public InvalidInputException() : base(StatusMessages.InvalidInputFields)
     {
     }
 

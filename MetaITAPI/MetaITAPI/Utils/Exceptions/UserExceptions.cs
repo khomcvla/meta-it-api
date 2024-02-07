@@ -1,7 +1,14 @@
+using MetaITAPI.Utils.Constants;
+
 namespace MetaITAPI.Utils.Exceptions
 {
     public class AlreadyExistException : Exception
     {
+        public AlreadyExistException() : base(StatusMessages.AlreadyExist)
+        {
+
+        }
+
         public AlreadyExistException(List<string> messages) : base(String.Join("; ", messages))
         {
         }
@@ -17,7 +24,7 @@ namespace MetaITAPI.Utils.Exceptions
 
     public class NotExistException : Exception
     {
-        public NotExistException()
+        public NotExistException() : base(StatusMessages.NotExist)
         {
         }
 

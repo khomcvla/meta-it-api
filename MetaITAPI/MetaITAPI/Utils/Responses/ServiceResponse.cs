@@ -1,4 +1,4 @@
-﻿namespace MetaITAPI.Common.Responses;
+﻿namespace MetaITAPI.Utils.Responses;
 
 public class ServiceResponse
 {

@@ -1,6 +1,4 @@
 
-using MetaITAPI.Entities;
-
 namespace MetaITAPI.Dtos;
 
 public class AuthorGetDto
