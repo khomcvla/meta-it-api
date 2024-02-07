@@ -3,6 +3,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace MetaITAPI.Migrations
 {
     /// <inheritdoc />
@@ -32,7 +34,6 @@ namespace MetaITAPI.Migrations
                     book_id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     author_id = table.Column<int>(type: "integer", nullable: false),
-                    AuthorId = table.Column<int>(type: "integer", nullable: false),
                     title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
@@ -44,6 +45,15 @@ namespace MetaITAPI.Migrations
                         principalTable: "author",
                         principalColumn: "author_id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "author",
+                columns: new[] { "author_id", "first_name", "last_name" },
+                values: new object[,]
+                {
+                    { 1, "FirstName1", "LastName1" },
+                    { 2, "FirstName2", "LastName2" }
                 });
 
             migrationBuilder.CreateIndex(

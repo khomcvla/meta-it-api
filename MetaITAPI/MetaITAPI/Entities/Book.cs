@@ -12,12 +12,11 @@ public class Book
     public int BookId { get; set; }
 
     [Column("author_id")]
-    [ForeignKey("author_id")]
-    public Author Author { get; set; }
+    [ForeignKey("Author")]
     public int AuthorId { get; set; }
+    public Author Author { get; set; }
 
     [Column("title")]
     [StringLength(100, MinimumLength = 2)]
     public string Title { get; set; }
-
 }

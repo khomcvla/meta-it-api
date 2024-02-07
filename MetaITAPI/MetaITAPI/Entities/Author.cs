@@ -19,5 +19,5 @@ public class Author
     [MaxLength(100)]
     public string LastName { get; set; }
 
-    public ICollection<Book> Books { get; set; }
+    public ICollection<Book> Books { get; set; } = new List<Book>();
 }

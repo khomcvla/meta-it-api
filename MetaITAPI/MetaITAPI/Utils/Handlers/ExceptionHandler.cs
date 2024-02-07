@@ -21,16 +21,16 @@ public static class ExceptionHandlerHelper
                 {
                     int statusCode;
                     string statusMessage = string.Empty;
-                    switch (exception)
+                    switch (exception.Error)
                     {
-                        case BookNotExistException:
+                        case NotExistException:
                             statusCode = StatusCodes.Status404NotFound;
-                            statusMessage = StatusMessages.UsersNotExist;
+                            statusMessage = StatusMessages.NotExist;
                             break;
 
-                        case BookAlreadyExistsException:
+                        case AlreadyExistException:
                             statusCode = StatusCodes.Status409Conflict;
-                            statusMessage = StatusMessages.UsersAlreadyExist;
+                            statusMessage = StatusMessages.AlreadyExist;
                             break;
 
                         case InvalidInputException:

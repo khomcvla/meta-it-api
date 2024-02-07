@@ -45,6 +45,20 @@ namespace MetaITAPI.Migrations
                     b.HasKey("AuthorId");
 
                     b.ToTable("author");
+
+                    b.HasData(
+                        new
+                        {
+                            AuthorId = 1,
+                            FirstName = "FirstName1",
+                            LastName = "LastName1"
+                        },
+                        new
+                        {
+                            AuthorId = 2,
+                            FirstName = "FirstName2",
+                            LastName = "LastName2"
+                        });
                 });
 
             modelBuilder.Entity("MetaITAPI.Entities.Book", b =>
@@ -57,7 +71,8 @@ namespace MetaITAPI.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BookId"));
 
                     b.Property<int>("AuthorId")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("author_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -65,12 +80,9 @@ namespace MetaITAPI.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("title");
 
-                    b.Property<int>("author_id")
-                        .HasColumnType("integer");
-
                     b.HasKey("BookId");
 
-                    b.HasIndex("author_id");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("book");
                 });
@@ -79,7 +91,7 @@ namespace MetaITAPI.Migrations
                 {
                     b.HasOne("MetaITAPI.Entities.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("author_id")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

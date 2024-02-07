@@ -6,8 +6,8 @@ namespace MetaITAPI.Interfaces;
 public interface IBookService
 {
     Task<ServiceResponse> GetAll();
-    Task<ServiceResponse> Get(long id);
+    Task<ServiceResponse> GetById(int bookId);
     Task<ServiceResponse> Add(BookPostDto book);
-    Task<ServiceResponse> Update(long id, BookPutDto book);
-    Task<ServiceResponse> Delete(long id);
+    Task<ServiceResponse> Update(int bookId, BookPatchDto book);
+    Task<ServiceResponse> Delete(int bookId);
 }
