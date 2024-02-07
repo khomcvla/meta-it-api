@@ -67,7 +67,7 @@ public class BookService : IBookService
         return new ServiceResponse(StatusCodes.Status200OK, book);
     }
 
-    public async Task<ServiceResponse> Delete(int bookId)
+    public async Task<ServiceResponse> DeleteById(int bookId)
     {
         if (!await _bookRepository.IsBookIdExist(bookId))
             throw new NotExistException(StatusMessages.BookNotExist);

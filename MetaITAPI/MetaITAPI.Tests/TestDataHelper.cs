@@ -57,22 +57,27 @@ public static class TestDataHelper
     //-------------------------------------------------------------------------
     public static IEnumerable<object[]> GetBookIdMemberData()
     {
-        yield return new object[] { EXISTED_INDEX, true };
-        yield return new object[] { NOT_EXISTED_INDEX, false };
+        yield return new object[] { EXISTED_INDEX };
+        yield return new object[] { NOT_EXISTED_INDEX };
     }
 
     //-------------------------------------------------------------------------
     public static IEnumerable<object?[]> AddBookMemberData()
     {
-        var existedBook = GetTestBook(EXISTED_INDEX);
-        var existedBookDto = GetMapper().Map<BookPostDto>(existedBook);
+        var notExistedAuthorNewBook = GetTestBook(NOT_EXISTED_INDEX);
+        notExistedAuthorNewBook.AuthorId = NOT_EXISTED_INDEX;
+        var notExistedAuthorNewBookDto = GetMapper().Map<BookPostDto>(notExistedAuthorNewBook);
 
-        var newBook = GetTestBook(NOT_EXISTED_INDEX);
-        newBook.AuthorId = EXISTED_INDEX;
-        var newBookDto = GetMapper().Map<BookPostDto>(newBook);
+        var existedBookExistedAuthor = GetTestBook(EXISTED_INDEX);
+        var existedBookExistedAuthorDto = GetMapper().Map<BookPostDto>(existedBookExistedAuthor);
 
-        yield return new object?[] { existedBookDto, false};
-        yield return new object?[] { newBookDto, true};
+        var newBookExistedAuthor = GetTestBook(NOT_EXISTED_INDEX);
+        newBookExistedAuthor.AuthorId = EXISTED_INDEX;
+        var newBookDto = GetMapper().Map<BookPostDto>(newBookExistedAuthor);
+
+        yield return new object?[] { notExistedAuthorNewBookDto};
+        yield return new object?[] { existedBookExistedAuthorDto};
+        yield return new object?[] { newBookDto};
     }
 
     //-------------------------------------------------------------------------
@@ -85,8 +90,15 @@ public static class TestDataHelper
         var notExistedBook = GetTestBook(NOT_EXISTED_INDEX);
         var notExistedBookDto = GetMapper().Map<BookPatchDto>(notExistedBook);
 
-        yield return new object?[] { EXISTED_INDEX, existedBookDto, true };
-        yield return new object?[] { NOT_EXISTED_INDEX, notExistedBookDto, false };
+        yield return new object?[] { EXISTED_INDEX, existedBookDto };
+        yield return new object?[] { NOT_EXISTED_INDEX, notExistedBookDto };
+    }
+
+    //-------------------------------------------------------------------------
+    public static IEnumerable<object?[]> DeleteBookMemberData()
+    {
+        yield return new object?[] { EXISTED_INDEX };
+        yield return new object?[] { NOT_EXISTED_INDEX };
     }
 
     //-------------------------------------------------------------------------

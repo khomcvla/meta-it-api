@@ -9,5 +9,5 @@ public interface IBookService
     Task<ServiceResponse> GetById(int bookId);
     Task<ServiceResponse> Add(BookPostDto book);
     Task<ServiceResponse> Update(int bookId, BookPatchDto book);
-    Task<ServiceResponse> Delete(int bookId);
+    Task<ServiceResponse> DeleteById(int bookId);
 }

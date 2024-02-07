@@ -82,7 +82,7 @@ public class BookController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorResponse))]
     public async Task<IActionResult> DeleteBook([FromRoute] int bookId)
     {
-        var response = await _bookService.Delete(bookId);
+        var response = await _bookService.DeleteById(bookId);
         return StatusCode(response.StatusCode, response.Value);
     }
 }
