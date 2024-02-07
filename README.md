@@ -23,7 +23,7 @@
 The API has undergone rigorous testing through unit tests to ensure reliability and proper functionality.
 
 ## Documentation
-To facilitate the use of this API, comprehensive documentation has been generated using Swagger/OpenAPI tools. For access to the documentation, please visit [documentation link](documentation-link).
+To facilitate the use of this API, comprehensive documentation has been generated using Swagger/OpenAPI tools.
 
 ## Database
 For storing information about books, a PostgreSQL database has been employed. The database can be run locally.
@@ -35,8 +35,6 @@ For testing purposes, the API URL has been set to: `https://localhost:8080`
 As a bonus, Docker has been implemented to enhance convenience and portability.
 
 ---
-
-With this .Net WebAPI, users can seamlessly manage their book catalog, leveraging the features and functionalities provided.
 
 ## How to Run
 To launch the application, simply use the following command:
