@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
-EXPOSE 80 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
@@ -17,8 +17,5 @@ RUN dotnet publish "MetaITAPI.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-RUN apt-get update && apt-get install -y postgresql-client
-ENV CONNECTION_STRING="Host=localhost;Database=postgres;Username=postgres;Password=postgres"
 
 ENTRYPOINT ["dotnet", "MetaITAPI.dll"]
